@@ -288,24 +288,6 @@ local function AimAt(Hitbox, Sensitivity)
         (Hitbox[4].Y - MouseLocation.Y) * Sensitivity
     )
 end
-
-local OldIndex = nil
-OldIndex = hookmetamethod(game, "__index", function(Self, Index)
-    if checkcaller and checkcaller() then return OldIndex(Self, Index) end
-
-    if SilentAim and SilentAim[3] and math.random(100) <= (Window.Flags["SilentAim/HitChance"] or 100) then
-        local Mode = Window.Flags["SilentAim/Mode"] or {}
-        if Self == Mouse then
-            if Index == "Target" and table.find(Mode, "Target") then
-                return SilentAim[3]
-            elseif Index == "Hit" and table.find(Mode, "Hit") then
-                return SilentAim[3].CFrame
-            end
-        end
-    end
-
-    return OldIndex(Self, Index)
-end)
 local OldNamecall = nil
 OldNamecall = hookmetamethod(game, "__namecall", function(Self, ...)
     if checkcaller() then return OldNamecall(Self, ...) end
