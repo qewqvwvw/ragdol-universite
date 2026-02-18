@@ -434,9 +434,13 @@ Parvus.Utilities.NewThreadLoop(0, function()
         Window.Flags["Trigger/Priority"][1],
         Window.Flags["Trigger/BodyParts"],
         Window.Flags["Trigger/Prediction"]
-    ) if not TriggerClosest then return end
-
-    task.wait(Window.Flags["Trigger/Delay"]) mouse1press()
+    )
+    
+    if not TriggerClosest then return end
+    
+    task.wait(Window.Flags["Trigger/Delay"])
+    mouse1press()
+    
     if Window.Flags["Trigger/HoldMouseButton"] then
         while task.wait() do
             TriggerClosest = GetClosest(
@@ -449,9 +453,13 @@ Parvus.Utilities.NewThreadLoop(0, function()
                 Window.Flags["Trigger/Priority"][1],
                 Window.Flags["Trigger/BodyParts"],
                 Window.Flags["Trigger/Prediction"]
-            ) if not TriggerClosest or not Trigger then break end
+            )
+            
+            if not TriggerClosest or not Trigger then break end
         end
-    end mouse1release()
+    end
+    
+    mouse1release()
 end)
 
 Workspace:GetPropertyChangedSignal("CurrentCamera"):Connect(function()
@@ -460,11 +468,11 @@ end)
 
 for Index, Player in pairs(PlayerService:GetPlayers()) do
     if Player == LocalPlayer then continue end
-    Parvus.Utilities.Drawing:AddESP(Player, "Player", "ESP/Player", Window.Flags)
+    Parvus.Utilities.Drawing.AddESP(Player, "Player", "ESP/Player", Window.Flags)
 end
 PlayerService.PlayerAdded:Connect(function(Player)
-    Parvus.Utilities.Drawing:AddESP(Player, "Player", "ESP/Player", Window.Flags)
+    Parvus.Utilities.Drawing.AddESP(Player, "Player", "ESP/Player", Window.Flags)
 end)
 PlayerService.PlayerRemoving:Connect(function(Player)
-    Parvus.Utilities.Drawing:RemoveESP(Player)
+    Parvus.Utilities.Drawing.RemoveESP(Player)
 end)
