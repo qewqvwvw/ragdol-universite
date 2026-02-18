@@ -136,8 +136,6 @@ local VisualsTab = Window:Tab({Name = "Visuals"}) do
         PlayerESPSection:Toggle({Name = "Head Dot", Flag = "ESP/Player/HeadDot", Value = false})
     end
 end
-end
-
 -- Settings Section
 local SettingsTab = Window:Tab({Name = "Settings"}) do
     local SettingsSection = SettingsTab:Section({Name = "Menu Settings", Side = "Left"}) do
