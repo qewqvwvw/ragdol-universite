@@ -101,7 +101,7 @@ loadModule("Universal.lua")
 print("✅ Репозиторий @ingamekid загружен!")
 
     Games = {
-        ["580765040" ] = { Name = "RAGDOLL UNIVERSE",           Script = "Games/RU"   },
+        ["580765040" ] = { Name = "RAGDOLL UNIVERSE",           Script = "Games/RU"   }
     }
 }
 
