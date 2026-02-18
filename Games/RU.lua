@@ -134,7 +134,16 @@ local VisualsTab = Window:Tab({Name = "Visuals"}) do
         PlayerESPSection:Toggle({Name = "Distance Text", Flag = "ESP/Player/DistanceText", Value = true})
         PlayerESPSection:Toggle({Name = "Tracers", Flag = "ESP/Player/Tracers", Value = false})
         PlayerESPSection:Toggle({Name = "Head Dot", Flag = "ESP/Player/HeadDot", Value = false})
-    end
+   end
+
+-- Эти функции не существуют в Parvus.Utilities, поэтому закомментируем их
+-- Parvus.Utilities:SetupWatermark(Window)
+-- Parvus.Utilities.Drawing.SetupCursor(Window)
+-- Parvus.Utilities.Drawing.SetupCrosshair(Window.Flags)
+
+Parvus.Utilities.Drawing.SetupFOV("Aimbot", Window.Flags)
+Parvus.Utilities.Drawing.SetupFOV("Trigger", Window.Flags)
+Parvus.Utilities.Drawing.SetupFOV("SilentAim", Window.Flags)
 end
 -- Settings Section
 local SettingsTab = Window:Tab({Name = "Settings"}) do
