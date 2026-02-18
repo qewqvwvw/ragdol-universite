@@ -75,7 +75,7 @@ local function GetGameInfo()
 end
 
 getgenv().Parvus = {
-    Source = "-- Loader.lua
+    Source = "-- Loader.lua }
 -- Loader.lua
 local function loadModule(path)
     local success, result = pcall(function()
