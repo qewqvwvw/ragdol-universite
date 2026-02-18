@@ -1,119 +1,44 @@
-repeat task.wait() until game.IsLoaded
-repeat task.wait() until game.GameId ~= 0
+-- Loader.lua - ИСПРАВЛЕНО
+-- by @ingamekid
 
-if Parvus and Parvus.Loaded then
-    Parvus.Utilities.UI:Push({
-        Title = "Varus Hub",
-        Description = "Script already running!",
-        Duration = 5
-    }) return
-end
+print("🔥 RAGDOLL UNIVERSE by @ingamekid")
+print("🔄 Загрузка...")
 
---[[if Parvus and (Parvus.Game and not Parvus.Loaded) then
-    Parvus.Utilities.UI:Push({
-        Title = "Varus Hub",
-        Description = "Something went wrong!",
-        Duration = 5
-    }) return
-end]]
-
-local PlayerService = game:GetService("Players")
-repeat task.wait() until PlayerService.LocalPlayer
-local LocalPlayer = PlayerService.LocalPlayer
-
-local Branch, NotificationTime, IsLocal = ...
---local ClearTeleportQueue = clear_teleport_queue
-local QueueOnTeleport = queue_on_teleport
-
-local function GetFile(File)
-    return IsLocal and readfile("Parvus/" .. File)
-    or game:HttpGet(("%s%s"):format(Parvus.Source, File))
-end
-
-local function LoadScript(Script)
-    return loadstring(GetFile(Script .. ".lua"), Script)()
-end
-
-local function IsDeadlineGame()
-    -- Check for Deadline-specific identifiers
-    local Workspace = game:GetService("Workspace")
-    
-    -- Check if "characters" folder exists (Deadline-specific identifier)
-    local charactersFolder = Workspace:FindFirstChild("characters")
-    if charactersFolder then
-        return true
-    end
-    
-    -- Try waiting for it with a short timeout
+-- Функция безопасной загрузки модулей
+local function loadModule(path)
     local success, result = pcall(function()
-        return Workspace:WaitForChild("characters", 3)
+        return game:HttpGet("https://raw.githubusercontent.com/qewqvwvw/ragdol-universite/main/" .. path)
     end)
-    
-    return success and result ~= nil
-end
-
-local function GetGameInfo()
-    -- Special check for Deadline - verify it's actually Deadline before loading
-    if tostring(game.GameId) == "12144402492" then
-        if IsDeadlineGame() then
-            return Parvus.Games["12144402492"]
+    if success and result then
+        local func, err = loadstring(result, path)
+        if func then
+            return func()
         else
-            -- Game ID matches but structure doesn't match Deadline
-            -- Fall back to Universal instead
-            warn("Game ID matches Deadline but game structure doesn't match. Loading Universal instead.")
-            return Parvus.Games.Universal
+            warn("❌ Ошибка в " .. path .. ": " .. err)
         end
+    else
+        warn("❌ Не удалось загрузить " .. path)
     end
-    
-    for Id, Info in pairs(Parvus.Games) do
-        if tostring(game.GameId) == Id then
-            return Info
-        end
-    end
-
-    return Parvus.Games.Universal
+    return nil
 end
 
-getgenv().Parvus = {
-    Source = "https://raw.githubusercontent.com/qewqvwvw/ragdol-universite/main/",
-    Games = {
-        ["Universal"] = { Name = "Universal", Script = "Universal" },
-        ["1168263273"] = { Name = "Bad Business", Script = "Games/BB" },
-        ["3360073263"] = { Name = "Bad Business PTR", Script = "Games/BB" },
-        ["1586272220"] = { Name = "Steel Titans", Script = "Games/ST" },
-        ["807930589"] = { Name = "The Wild West", Script = "Games/TWW" },
-        ["580765040"] = { Name = "RAGDOLL UNIVERSE", Script = "Games/RU" },
-        ["187796008"] = { Name = "Those Who Remain", Script = "Games/TWR" },
-        ["358276974"] = { Name = "Apocalypse Rising 2", Script = "Games/AR2" },
-        ["3495983524"] = { Name = "Apocalypse Rising 2 Dev.", Script = "Games/AR2" },
-        ["1054526971"] = { Name = "Blackhawk Rescue Mission 5", Script = "Games/BRM5" }
-    }
-}
-Parvus.Utilities = LoadScript("Utilities/Main")
-Parvus.Utilities.UI = LoadScript("Utilities/UI")
-Parvus.Utilities.Physics = LoadScript("Utilities/Physics")
-Parvus.Utilities.Drawing = LoadScript("Utilities/Drawing")
+-- Загружаем модули
+local Main = loadModule("Utilities/Main.lua")
+local Ragdoll = loadModule("Games/RU.lua")
+local Universal = loadModule("Universal.lua")
 
-Parvus.Cursor = GetFile("Utilities/ArrowCursor.png")
-Parvus.Loadstring = GetFile("Utilities/Loadstring")
-Parvus.Loadstring = Parvus.Loadstring:format(
-    Parvus.Source, Branch, NotificationTime, tostring(IsLocal)
-)
-
-LocalPlayer.OnTeleport:Connect(function(State)
-    if State == Enum.TeleportState.InProgress then
-        --ClearTeleportQueue()
-        QueueOnTeleport(Parvus.Loadstring)
+-- Проверяем загрузку
+if Main and Ragdoll then
+    print("✅ Модули загружены!")
+    
+    -- Если есть функция инициализации в Main, вызываем её
+    if Main.Initialize then
+        Main.Initialize()
     end
-end)
+    
+    print("✅ Скрипт готов к работе!")
+else
+    warn("❌ Не удалось загрузить модули")
+end
 
-Parvus.Game = GetGameInfo()
-LoadScript(Parvus.Game.Script)
-Parvus.Loaded = true
-
-Parvus.Utilities.UI:Push({
-    Title = "Varus Hub",
-    Description = Parvus.Game.Name .. " loaded! \n This Script Was Made By Ayham.",
-    Duration = NotificationTime
-})
-
+print("✅ Репозиторий @ingamekid загружен!")
