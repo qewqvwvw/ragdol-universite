@@ -162,9 +162,9 @@ local Window = Parvus.Utilities.UI:Window({
         end
     end
 end
-Parvus.Utilities.InitAutoLoad(Window)
-Parvus.Utilities:SetupWatermark(Window)
-Parvus.Utilities:SetupLighting(Window.Flags)
+--Parvus.Utilities.InitAutoLoad(Window)
+--Parvus.Utilities:SetupWatermark(Window)
+--Parvus.Utilities:SetupLighting(Window.Flags)
 Parvus.Utilities.Drawing.SetupCursor(Window)
 Parvus.Utilities.Drawing.SetupCrosshair(Window.Flags)
 Parvus.Utilities.Drawing.SetupFOV("Aimbot", Window.Flags)
