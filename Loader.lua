@@ -100,11 +100,19 @@ loadModule("Universal.lua")
 
 print("✅ Репозиторий @ingamekid загружен!")
 
-    Games = {
-        ["580765040" ] = { Name = "RAGDOLL UNIVERSE",           Script = "Games/RU"   }
+       Games = {
+        ["Universal" ] = { Name = "Universal",                  Script = "Universal"  },
+        ["1168263273"] = { Name = "Bad Business",               Script = "Games/BB"   },
+        ["3360073263"] = { Name = "Bad Business PTR",           Script = "Games/BB"   },
+        ["1586272220"] = { Name = "Steel Titans",               Script = "Games/ST"   },
+        ["807930589" ] = { Name = "The Wild West",              Script = "Games/TWW"  },
+        ["580765040" ] = { Name = "RAGDOLL UNIVERSE",           Script = "Games/RU"   },
+        ["187796008" ] = { Name = "Those Who Remain",           Script = "Games/TWR"  },
+        ["358276974" ] = { Name = "Apocalypse Rising 2",        Script = "Games/AR2"  },
+        ["3495983524"] = { Name = "Apocalypse Rising 2 Dev.",   Script = "Games/AR2"  },
+        ["1054526971"] = { Name = "Blackhawk Rescue Mission 5", Script = "Games/BRM5" }
     }
 }
-
 Parvus.Utilities = LoadScript("Utilities/Main")
 Parvus.Utilities.UI = LoadScript("Utilities/UI")
 Parvus.Utilities.Physics = LoadScript("Utilities/Physics")
