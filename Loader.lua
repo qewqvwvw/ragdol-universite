@@ -75,41 +75,17 @@ local function GetGameInfo()
 end
 
 getgenv().Parvus = {
-    Source = "-- Loader.lua }
--- Loader.lua
-local function loadModule(path)
-    local success, result = pcall(function()
-        return game:HttpGet("https://raw.githubusercontent.com/qewqvwvw/ragdol-universite/main/" .. path)
-    end)
-    if success and result then
-        local func, err = loadstring(result, path)
-        if func then
-            return func()
-        else
-            warn("Ошибка в " .. path .. ": " .. err)
-        end
-    else
-        warn("Не удалось загрузить " .. path)
-    end
-    return nil
-end
-
-local Main = loadModule("Utilities/Main.lua")
-local Ragdoll = loadModule("Games/RU.lua")
-loadModule("Universal.lua")
-
-print("✅ Репозиторий @ingamekid загружен!")
-
-       Games = {
-        ["Universal" ] = { Name = "Universal",                  Script = "Universal"  },
-        ["1168263273"] = { Name = "Bad Business",               Script = "Games/BB"   },
-        ["3360073263"] = { Name = "Bad Business PTR",           Script = "Games/BB"   },
-        ["1586272220"] = { Name = "Steel Titans",               Script = "Games/ST"   },
-        ["807930589" ] = { Name = "The Wild West",              Script = "Games/TWW"  },
-        ["580765040" ] = { Name = "RAGDOLL UNIVERSE",           Script = "Games/RU"   },
-        ["187796008" ] = { Name = "Those Who Remain",           Script = "Games/TWR"  },
-        ["358276974" ] = { Name = "Apocalypse Rising 2",        Script = "Games/AR2"  },
-        ["3495983524"] = { Name = "Apocalypse Rising 2 Dev.",   Script = "Games/AR2"  },
+    Source = "https://raw.githubusercontent.com/qewqvwvw/ragdol-universite/main/",
+    Games = {
+        ["Universal"] = { Name = "Universal", Script = "Universal" },
+        ["1168263273"] = { Name = "Bad Business", Script = "Games/BB" },
+        ["3360073263"] = { Name = "Bad Business PTR", Script = "Games/BB" },
+        ["1586272220"] = { Name = "Steel Titans", Script = "Games/ST" },
+        ["807930589"] = { Name = "The Wild West", Script = "Games/TWW" },
+        ["580765040"] = { Name = "RAGDOLL UNIVERSE", Script = "Games/RU" },
+        ["187796008"] = { Name = "Those Who Remain", Script = "Games/TWR" },
+        ["358276974"] = { Name = "Apocalypse Rising 2", Script = "Games/AR2" },
+        ["3495983524"] = { Name = "Apocalypse Rising 2 Dev.", Script = "Games/AR2" },
         ["1054526971"] = { Name = "Blackhawk Rescue Mission 5", Script = "Games/BRM5" }
     }
 }
