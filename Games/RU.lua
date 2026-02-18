@@ -136,7 +136,14 @@ local VisualsTab = Window:Tab({Name = "Visuals"}) do
         PlayerESPSection:Toggle({Name = "Head Dot", Flag = "ESP/Player/HeadDot", Value = false})
     end
 end
-end Parvus.Utilities.InitAutoLoad(Window)
+end
+
+-- Settings Section
+local SettingsTab = Window:Tab({Name = "Settings"}) do
+    local SettingsSection = SettingsTab:Section({Name = "Menu Settings", Side = "Left"}) do
+        SettingsSection:Keybind({Name = "Menu Keybind", Flag = "Menu/Keybind", Value = "RightShift"})
+    end
+end
 
 Parvus.Utilities:SetupWatermark(Window)
 Parvus.Utilities.Drawing.SetupCursor(Window)
