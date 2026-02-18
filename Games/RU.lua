@@ -119,14 +119,23 @@ local Window = Parvus.Utilities.UI:Window({
             TFOVSection:Slider({Name = "Thickness", Flag = "Trigger/FOV/Thickness", Min = 1, Max = 10, Value = 2})
         end
     end
-    local VisualsSection = Parvus.Utilities:ESPSection(Window, "Visuals", "ESP/Player", true, true, true, true, true, false) do
-        VisualsSection:Colorpicker({Name = "Ally Color", Flag = "ESP/Player/Ally", Value = {0.3333333432674408, 0.6666666269302368, 1, 0, false}})
-        VisualsSection:Colorpicker({Name = "Enemy Color", Flag = "ESP/Player/Enemy", Value = {1, 0.6666666269302368, 1, 0, false}})
-        VisualsSection:Toggle({Name = "Team Check", Flag = "ESP/Player/TeamCheck", Value = true})
-        VisualsSection:Toggle({Name = "Use Player Color", Flag = "ESP/Player/TeamColor", Value = false})
-        VisualsSection:Toggle({Name = "Distance Check", Flag = "ESP/Player/DistanceCheck", Value = false})
-        VisualsSection:Slider({Name = "Distance", Flag = "ESP/Player/Distance", Min = 25, Max = 1000, Value = 250, Unit = "studs"})
-    end Parvus.Utilities:SettingsSection(Window, "RightShift", false)
+local VisualsTab = Window:Tab({Name = "Visuals"}) do
+    local PlayerESPSection = VisualsTab:Section({Name = "Player ESP", Side = "Left"}) do
+        PlayerESPSection:Toggle({Name = "Enabled", Flag = "ESP/Player/Enabled", Value = true})
+        PlayerESPSection:Colorpicker({Name = "Ally Color", Flag = "ESP/Player/Ally", Value = {0.3333333432674408, 0.6666666269302368, 1, 0, false}})
+        PlayerESPSection:Colorpicker({Name = "Enemy Color", Flag = "ESP/Player/Enemy", Value = {1, 0.6666666269302368, 1, 0, false}})
+        PlayerESPSection:Toggle({Name = "Team Check", Flag = "ESP/Player/TeamCheck", Value = true})
+        PlayerESPSection:Toggle({Name = "Use Player Color", Flag = "ESP/Player/TeamColor", Value = false})
+        PlayerESPSection:Toggle({Name = "Distance Check", Flag = "ESP/Player/DistanceCheck", Value = false})
+        PlayerESPSection:Slider({Name = "Distance", Flag = "ESP/Player/Distance", Min = 25, Max = 1000, Value = 250, Unit = "studs"})
+        PlayerESPSection:Toggle({Name = "Box", Flag = "ESP/Player/Box", Value = true})
+        PlayerESPSection:Toggle({Name = "Name", Flag = "ESP/Player/Name", Value = true})
+        PlayerESPSection:Toggle({Name = "Health", Flag = "ESP/Player/Health", Value = true})
+        PlayerESPSection:Toggle({Name = "Distance Text", Flag = "ESP/Player/DistanceText", Value = true})
+        PlayerESPSection:Toggle({Name = "Tracers", Flag = "ESP/Player/Tracers", Value = false})
+        PlayerESPSection:Toggle({Name = "Head Dot", Flag = "ESP/Player/HeadDot", Value = false})
+    end
+end
 end Parvus.Utilities.InitAutoLoad(Window)
 
 Parvus.Utilities:SetupWatermark(Window)
