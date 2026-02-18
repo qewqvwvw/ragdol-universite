@@ -443,22 +443,21 @@ Parvus.Utilities.NewThreadLoop(0, function()
     
     if Window.Flags["Trigger/HoldMouseButton"] then
         while task.wait() do
-            TriggerClosest = GetClosest(
-                Window.Flags["Trigger/Enabled"],
-                Window.Flags["Trigger/TeamCheck"],
-                Window.Flags["Trigger/VisibilityCheck"],
-                Window.Flags["Trigger/DistanceCheck"],
-                Window.Flags["Trigger/DistanceLimit"],
-                Window.Flags["Trigger/FOV/Radius"],
-                Window.Flags["Trigger/Priority"][1],
-                Window.Flags["Trigger/BodyParts"],
-                Window.Flags["Trigger/Prediction"]
-            )
-            
-            if not TriggerClosest or not Trigger then break end
-        end
-    end
+    TriggerClosest = GetClosest(
+        Window.Flags["Trigger/Enabled"],
+        Window.Flags["Trigger/TeamCheck"],
+        Window.Flags["Trigger/VisibilityCheck"],
+        Window.Flags["Trigger/DistanceCheck"],
+        Window.Flags["Trigger/DistanceLimit"],
+        Window.Flags["Trigger/FOV/Radius"],
+        Window.Flags["Trigger/Priority"][1],
+        Window.Flags["Trigger/BodyParts"],
+        Window.Flags["Trigger/Prediction"]
+    )
     
+    if not TriggerClosest or not Trigger then break end
+end
+    end
     mouse1release()
 end)
 
@@ -470,9 +469,11 @@ for Index, Player in pairs(PlayerService:GetPlayers()) do
     if Player == LocalPlayer then continue end
     Parvus.Utilities.Drawing.AddESP(Player, "Player", "ESP/Player", Window.Flags)
 end
+
 PlayerService.PlayerAdded:Connect(function(Player)
     Parvus.Utilities.Drawing.AddESP(Player, "Player", "ESP/Player", Window.Flags)
 end)
+
 PlayerService.PlayerRemoving:Connect(function(Player)
     Parvus.Utilities.Drawing.RemoveESP(Player)
 end)
