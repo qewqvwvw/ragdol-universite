@@ -291,14 +291,14 @@ end
 
 local OldIndex = nil
 OldIndex = hookmetamethod(game, "__index", function(Self, Index)
-    if checkcaller() then return OldIndex(Self, Index) end
+    if checkcaller and checkcaller() then return OldIndex(Self, Index) end
 
-    if SilentAim and math.random(100) <= Window.Flags["SilentAim/HitChance"] then
-        local Mode = Window.Flags["SilentAim/Mode"]
+    if SilentAim and SilentAim[3] and math.random(100) <= (Window.Flags["SilentAim/HitChance"] or 100) then
+        local Mode = Window.Flags["SilentAim/Mode"] or {}
         if Self == Mouse then
-            if Index == "Target" and table.find(Mode, Index) then
+            if Index == "Target" and table.find(Mode, "Target") then
                 return SilentAim[3]
-            elseif Index== "Hit" and table.find(Mode, Index) then
+            elseif Index == "Hit" and table.find(Mode, "Hit") then
                 return SilentAim[3].CFrame
             end
         end
@@ -306,7 +306,6 @@ OldIndex = hookmetamethod(game, "__index", function(Self, Index)
 
     return OldIndex(Self, Index)
 end)
-
 local OldNamecall = nil
 OldNamecall = hookmetamethod(game, "__namecall", function(Self, ...)
     if checkcaller() then return OldNamecall(Self, ...) end
